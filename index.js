@@ -5,6 +5,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const initRoutes = require("./src/routers");
 
 // tạo con app server
 const app = express();
@@ -20,9 +21,7 @@ app.use(
 app.use(express.json()); //sau khi đúng địa chỉ URL và các methods thì nó chuyển sang string
 app.use(express.urlencoded({ extended: true })); // client gửi lên là 1 cái mảng, object thì urlencoded sẽ đọc cái mã đó luôn
 
-app.use("/", (req, res) => {
-    return res.send("SERVER ON");
-});
+initRoutes(app);
 
 const PORT = process.env.PORT || 8888;
 
