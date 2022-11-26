@@ -6,7 +6,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const initRoutes = require("./src/routers");
-
+require("./connection_db");
 // tạo con app server
 const app = express();
 // config app
