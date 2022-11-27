@@ -1,7 +1,7 @@
 /node_modules
 
-/insert
+/insert.txt
 
-/note
+/note.txt
 
 .env

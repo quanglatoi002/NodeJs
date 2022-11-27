@@ -1,1 +1,0 @@
-INSERT INTO Roles (code, value) VALUES 

@@ -22,3 +22,15 @@ vd  "scripts": {
 
 
 --->do bên service trả về 1 Promise nên bên controller phải dùng async và await
+
+5. ------> Tiếp đó chúng ta sẽ thông quá sequire để sử dụng hàm findOrCreate để kiểm tra xem email đã tồn tại hay chưa. Nếu chưa thì nó sẽ tạo mới.
+vd const response = await db.User.findOrCreate({
+                where: { email },
+                defaults: {
+                    email,
+                    password:password
+                }
+            });
+--> findOrCreate nhận vào [user, create] => {
+    nếu tìm không ra username thì create sẽ trả về false và ngược lại
+}
