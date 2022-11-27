@@ -34,3 +34,5 @@ vd const response = await db.User.findOrCreate({
 --> findOrCreate nhận vào [user, create] => {
     nếu tìm không ra username thì create sẽ trả về false và ngược lại
 }
+
+---> Tiếp theo tải JWT 
