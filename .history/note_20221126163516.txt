@@ -1,0 +1,24 @@
+-----   MỤC 4  ------
+. cài đặt babel
+npm i -D @babel/core 
+-> giúp chúng ta có thể đồng bộ với các cú pháp từ cũ tới mới
+@babel/preset-env 
+->giúp chạy dự án bằng babel
+ 
+->Tổng hợp lại lệnh babel
+
+Tạo ".babelrc"
+
+-> babel giúp chúng ta giải quyết vấn đề được sử dụng 1 trong 2(import và require)
+
+Thêm 
+{
+    "presets": ["@babel/preset-env"]
+} vào trong .babelrc để có thể được sử dụng cú pháp của các es cũ và mới nhất.
+Sau đó vào package-log để thêm --exec babel-node 
+vd  "scripts": {
+        "dev": "nodemon --exec babel-node index.js"
+    },
+
+
+---> ở bên controller do bên service trả về 1 Promi

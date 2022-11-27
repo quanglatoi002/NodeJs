@@ -1,0 +1,9 @@
+-----   MỤC 4  ------
+. cài đặt babel
+npm i -D @babel/core 
+-> giúp chúng ta có thể đồng bộ với các cú pháp từ cũ tới mới
+@babel/preset-env 
+->giúp chạy dự án bằng babel
+ 
+
+->Tổng hợp lại lệnh babel

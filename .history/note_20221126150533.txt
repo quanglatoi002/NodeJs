@@ -1,0 +1,2 @@
+4. cài đặt babel
+npm i -D @babel/core
