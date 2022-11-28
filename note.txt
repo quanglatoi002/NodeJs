@@ -36,3 +36,6 @@ vd const response = await db.User.findOrCreate({
 }
 
 ---> Tiếp theo tải JWT 
+
+-> Tải http-error để xử lý khi xảy ra lỗi
+--> Tải "joi" để xử lý validation

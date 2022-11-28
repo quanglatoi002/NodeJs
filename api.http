@@ -1,4 +1,6 @@
-# GET http://localhost:5001/api/v1/user/
+GET http://localhost:5001/api/v1/user/sss
+###
+
 POST  http://localhost:5001/api/v1/auth/register
 Content-Type: application/json
 
