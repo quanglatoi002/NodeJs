@@ -16,6 +16,7 @@ export const register = async (req, res) => {
         //     });
 
         // Validate email and password
+        //Nếu email, password không có lỗi thì kết quả nhận vào sẽ là undefined ngược lại sẽ trả về 1 object
         const { error } = joi.object({ email, password }).validate(req.body);
         if (error) return badRequest(error.details[0]?.message, res);
         const response = await services.register(req.body);
