@@ -32,7 +32,7 @@ export const register = ({ email, password }) =>
                 mes: response[1]
                     ? "Register is successfully"
                     : "Email already used",
-                access_token: `Bearer ${token}`,
+                access_token: token ? `Bearer ${token}` : token,
             });
             res({
                 err: 0,

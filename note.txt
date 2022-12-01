@@ -38,4 +38,6 @@ vd const response = await db.User.findOrCreate({
 ---> Tiếp theo tải JWT 
 
 -> Tải http-error để xử lý khi xảy ra lỗi
+Create folder middleawares trong đó có file handle_error nhắm edit lại http-error cho phù hợp yêu cầu
 --> Tải "joi" để xử lý validation
+Create folder helpers trong đó có joi_schema
