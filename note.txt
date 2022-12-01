@@ -45,3 +45,6 @@ Create folder helpers trong đó có joi_schema
 Create verify_token in folder middlewares 
 middlewares sẽ được chạy ở giữa router và controllers
 vd : router.get('/', middlewares, user.getCurrent)
+
+-->>
+Cretae vefify_role in folder middlewares nhằm phân quyền người dùng
