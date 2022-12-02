@@ -34,10 +34,6 @@ export const register = ({ email, password }) =>
                     : "Email already used",
                 access_token: token ? `Bearer ${token}` : token,
             });
-            res({
-                err: 0,
-                mes: "register service",
-            });
         } catch (error) {
             reject.error;
         }

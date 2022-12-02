@@ -49,3 +49,7 @@ vd : router.get('/', middlewares, user.getCurrent)
 -->>
 Cretae vefify_role in folder middlewares nhằm phân quyền người dùng
 --> Liên kết khóa ngoại giữa table role và table user
+
+---> SCAPE API
+Create 2 table books and category
+Create encode để chuyển chữ việt sang tiếng anh ko dấu
