@@ -7,7 +7,6 @@ const router = express.Router();
 
 // PRIVATE ROUTER
 router.use(verifyToken);
-router.use(isAdmin);
 router.get("/", controllers.getCurrent);
 
 module.exports = router;

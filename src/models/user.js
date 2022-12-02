@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            // liên kết khóa ngoại
+            User.belongsTo(models.Role, {
+                foreignKey: "role_code",
+                targetKey: "code",
+                as: "roleData",
+            });
         }
     }
     User.init(
