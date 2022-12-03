@@ -27,3 +27,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiO
 
 GET  http://localhost:5001/api/v1/insert/
 Content-Type: application/json
+###
+
+# GET  http://localhost:5001/api/v1/book/?order[]=price&order[]=DESC&limit=2&page=2&name=of
+GET  http://localhost:5001/api/v1/book/?available[]=5&available[]=10

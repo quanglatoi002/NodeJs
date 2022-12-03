@@ -12,7 +12,12 @@ export const insertData = () =>
                     value: item,
                 });
             });
-            // [key, [1, 3,4,]]
+            // entries(object) => [['travel','all book' ]]
+            //forEach(['travel', 'all book']) =>
+            //'travel, {all book}'.map()=>
+            //item[1] = {all book}.map()
+
+            // [key, [value]]
             const dataArr = Object.entries(data);
             dataArr.forEach((item) => {
                 item[1]?.map(async (book) => {
