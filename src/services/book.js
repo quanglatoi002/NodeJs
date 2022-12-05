@@ -1,5 +1,6 @@
 import db from "../models";
 import { Op } from "sequelize";
+import { v4 as generateId } from "uuid";
 
 export const getBooks = ({ page, limit, order, name, available, ...query }) =>
     new Promise(async (res, reject) => {
@@ -11,12 +12,27 @@ export const getBooks = ({ page, limit, order, name, available, ...query }) =>
             const fLimit = +limit || +process.env.LIMIT_BOOK;
             queries.offset = offset * fLimit;
             queries.limit = fLimit;
+            //sắp sắp theo hướng giảm dần order[]=price&order[]=DESC
             if (order) queries.order = [order];
+            // Op.substring : %name% khi mình quên nội dung ở đầu và cuối ra sao thì có thể sử dung substring dùng ta chỉ cần có nội dụng ở giữa
             if (name) query.title = { [Op.substring]: name };
             if (available) query.available = { [Op.between]: available };
             const response = await db.Book.findAndCountAll({
                 where: query,
                 ...queries,
+                attributes: {
+                    exclude: ["category_code"],
+                },
+
+                include: [
+                    {
+                        model: db.Category,
+                        attributes: {
+                            exclude: ["createAt", "updateAt"],
+                        },
+                        as: "categoryData",
+                    },
+                ],
             });
             res({
                 err: response ? 0 : 1,
@@ -24,6 +40,25 @@ export const getBooks = ({ page, limit, order, name, available, ...query }) =>
                 bookData: response,
             });
         } catch (error) {
-            reject.error;
+            reject(error);
+        }
+    });
+//CREATE
+export const createNewBook = (body) =>
+    new Promise(async (res, reject) => {
+        try {
+            const response = await db.Book.findOrCreate({
+                where: { title: body?.title },
+                defaults: {
+                    ...body,
+                    id: generateId(),
+                },
+            });
+            res({
+                err: response[1] ? 0 : 1,
+                mes: response[1] ? "Created" : "Cannot create new book",
+            });
+        } catch (error) {
+            reject(error);
         }
     });

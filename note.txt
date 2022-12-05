@@ -53,3 +53,5 @@ Cretae vefify_role in folder middlewares nhằm phân quyền người dùng
 ---> SCAPE API
 Create 2 table books and category
 Create encode để chuyển chữ việt sang tiếng anh ko dấu
+
+---> tải thư viện multer
