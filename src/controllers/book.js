@@ -36,10 +36,11 @@ export const createNewBook = async (req, res) => {
             })
             .validate({ ...req.body, image: fileData?.path });
         if (error) {
+            //Sau khi người dùng nhấn create thì ảnh sẽ được gửi lên cloudinary trên khi đưa tới controller, nếu joi_chema mà error thì lập thức xóa ảnh đã lưu trước đó trên cloud
             if (fileData) cloudinary.uploader.destroy(fileData.filename);
             return badRequest(error.details[0].message, res);
         }
-        const response = await services.createNewBook(req.body);
+        const response = await services.createNewBook(req.body, fileData);
         return res.status(200).json(response);
     } catch (error) {
         return internalServerError(res);
