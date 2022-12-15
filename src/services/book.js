@@ -74,6 +74,7 @@ export const updateBook = ({ bid, ...body }, fileData) =>
     new Promise(async (resolve, reject) => {
         try {
             if (fileData) body.image = fileData?.path;
+            // update(bạn cần update cái gì, {đk để update})
             const response = await db.Book.update(body, {
                 where: { id: bid },
             });
@@ -89,5 +90,27 @@ export const updateBook = ({ bid, ...body }, fileData) =>
         } catch (error) {
             reject(error);
             if (fileData) cloudinary.uploader.destroy(fileData.filename);
+        }
+    });
+
+// delete
+// params = {
+// bids = [id1, id2],
+// filename = [filename1, filename2]
+// }
+
+export const deleteBook = ({ bids, filename }) =>
+    new Promise(async (resolve, reject) => {
+        try {
+            const response = await db.Book.destroy({
+                where: { id: bids },
+            });
+            resolve({
+                err: response > 0 ? 0 : 1,
+                mes: `${response} books deleted`,
+            });
+            cloudinary.api.delete_resources(filename);
+        } catch (error) {
+            reject(error);
         }
     });
