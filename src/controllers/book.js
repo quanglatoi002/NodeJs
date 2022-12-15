@@ -6,6 +6,7 @@ import {
     category_code,
     price,
     available,
+    bid,
 } from "../helpers/joi_schema";
 import joi from "joi";
 const cloudinary = require("cloudinary").v2;
@@ -44,5 +45,21 @@ export const createNewBook = async (req, res) => {
         return res.status(200).json(response);
     } catch (error) {
         return internalServerError(res);
+    }
+};
+
+// UPDATE
+export const updateBook = async (req, res) => {
+    try {
+        const fileData = req.file;
+        const { error } = joi.object({ bid }).validate({ bid: req.body.bid });
+        if (error) {
+            if (fileData) cloudinary.uploader.destroy(fileData.filename);
+            return badRequest(error.details[0].message, res);
+        }
+        const response = await services.updateBook(req.body, fileData);
+        return res.status(200).json(response);
+    } catch (error) {
+        return interalServerError(res);
     }
 };
