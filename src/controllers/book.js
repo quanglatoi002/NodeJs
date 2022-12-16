@@ -18,6 +18,8 @@ export const getBooks = async (req, res) => {
     try {
         // nếu bạn nhận dữ liệu từ param từ phía client thì kết quả sẽ trả về trên req.query
         //nếu bạn dùng phương thức get post thì kết quả trả về sẽ ở req.body
+        // Trước những promise thì phải có await
+        // getBooks nhận cho mình 1 callback trong đó có chứa new promise
         const response = await services.getBooks(req.query);
         return res.status(200).json(response);
     } catch (error) {
@@ -67,7 +69,7 @@ export const updateBook = async (req, res) => {
     }
 };
 
-// UPDATE
+// DELETE
 export const deleteBook = async (req, res) => {
     try {
         const { error } = joi.object({ bids, filename }).validate(req.query);

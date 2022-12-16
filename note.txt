@@ -55,3 +55,10 @@ Create 2 table books and category
 Create encode để chuyển chữ việt sang tiếng anh ko dấu
 
 ---> tải thư viện multer
+
+
+
+--> req.query chủ yếu được dùng cho get, delete vd http://localhost:5001/api/v1/book/?name=book cái thằng phía sau ? là query
+--> req.body chủ yếu được dùng cho post,put vd http://localhost:5001/api/v1/book/ không có bất kỳ parameter nào phía sau
+--> req.params chủ yếu được dùng cho get, delete vd http://localhost:5001/api/v1/book/?name=book 14 là cái số cuối cùng
+
