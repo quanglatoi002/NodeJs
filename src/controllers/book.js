@@ -39,6 +39,7 @@ export const createNewBook = async (req, res) => {
                 category_code,
                 price,
                 available,
+                description,
             })
             .validate({ ...req.body, image: fileData?.path });
         if (error) {

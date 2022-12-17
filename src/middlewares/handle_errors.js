@@ -23,10 +23,11 @@ export const notFound = (req, res) => {
     });
 };
 // err 401
-export const notAuth = (err, res) => {
+// trả về 2 là token hết hạn
+export const notAuth = (err, res, isExpired) => {
     const error = createHttpError.Unauthorized(err);
     return res.status(error.status).json({
-        err: 1,
+        err: isExpired ? 2 : 1,
         mes: error.message,
     });
 };
