@@ -22,7 +22,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:5001/api/v1/user/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2NzEyNDkxOTAsImV4cCI6MTY3MTI0OTE5NX0.LPDuMAe1wcr7yGf-e0LUyMNicRBO7XdJi3mim5OEUdE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlX2NvZGUiOiJSMyIsImlhdCI6MTY3MTI1NTIxNywiZXhwIjoxNjcxMjU1MjIyfQ.zhtXpWz7WsNrcGV8n1XtnOqAljg0UvJwqrNKfyPlz70
 ###
 
 GET  http://localhost:5001/api/v1/insert/

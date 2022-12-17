@@ -48,6 +48,7 @@ export const register = ({ email, password }) =>
                     : accessToken,
                 refresh_token: refreshToken,
             });
+            //Sau khi thành công tạo refresh_token thì cập nhật token đó lên db.User
             if (refreshToken) {
                 await db.User.update(
                     {
@@ -70,9 +71,9 @@ export const login = ({ email, password }) =>
                 where: { email },
                 raw: true, // chỉ lấy giá trị của 1 object
             });
-            const isCheck =
+            const isChecked =
                 response && bcrypt.compareSync(password, response.password);
-            const token = isCheck
+            const token = isChecked
                 ? jwt.sign(
                       {
                           id: response.id,
@@ -80,9 +81,20 @@ export const login = ({ email, password }) =>
                           role_code: response.role_code,
                       },
                       process.env.JWT_SECRET,
-                      { expiresIn: "5d" }
+                      { expiresIn: "5s" }
                   )
                 : null;
+            //JWT_SECRET_REFRESH_TOKEN
+            const refreshToken = isChecked
+                ? jwt.sign(
+                      {
+                          id: response.id,
+                      },
+                      process.env.JWT_SECRET_REFRESH_TOKEN,
+                      { expiresIn: "20d" }
+                  )
+                : null;
+
             res({
                 err: token ? 0 : 1,
                 mes: token
@@ -91,11 +103,18 @@ export const login = ({ email, password }) =>
                     ? "Password is wrong"
                     : "Email is not registered ",
                 access_token: token ? `Bearer ${token}` : token,
+                refresh_token: refreshToken,
             });
-            res({
-                err: 0,
-                mes: "login service",
-            });
+            if (refreshToken) {
+                await db.User.update(
+                    {
+                        refresh_token: refreshToken,
+                    },
+                    {
+                        where: { id: response.id },
+                    }
+                );
+            }
         } catch (error) {
             reject.error;
         }
