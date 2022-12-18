@@ -1,9 +1,10 @@
-import * as controller from "../controllers";
+import * as controllers from "../controllers";
 import express from "express";
 
 const router = express.Router();
 
-router.post("/register", controller.register);
-router.post("/login", controller.login);
+router.post("/register", controllers.register);
+router.post("/login", controllers.login);
+router.post("/refresh-token", controllers.refreshTokenController);
 
 module.exports = router;

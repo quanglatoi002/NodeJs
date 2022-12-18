@@ -8,7 +8,7 @@ export const getOne = (userId) =>
                 // Để chọn 1 số thuộc tính thì sử dụng attributes
                 attributes: {
                     // exclude loại bỏ 1 số thuộc tinh ko muốn xuất ra
-                    exclude: ["password", "role_code"],
+                    exclude: ["password", "role_code", "refresh_token"],
                 },
                 // muốn sử dụng bảng khác trang bảng khác thì sử dụng include
                 include: [

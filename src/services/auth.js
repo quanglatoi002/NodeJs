@@ -91,7 +91,7 @@ export const login = ({ email, password }) =>
                           id: response.id,
                       },
                       process.env.JWT_SECRET_REFRESH_TOKEN,
-                      { expiresIn: "20d" }
+                      { expiresIn: "60s" }
                   )
                 : null;
 
@@ -117,5 +117,51 @@ export const login = ({ email, password }) =>
             }
         } catch (error) {
             reject.error;
+        }
+    });
+
+//refresh_token
+export const refreshToken = (refresh_token) =>
+    new Promise(async (resolve, reject) => {
+        try {
+            const response = await db.User.findOne({
+                where: { refresh_token },
+            });
+            if (response) {
+                jwt.verify(
+                    refresh_token,
+                    process.env.JWT_SECRET_REFRESH_TOKEN,
+                    (err) => {
+                        if (err) {
+                            resolve({
+                                err: 1,
+                                mes: "Refresh token expired. Require login",
+                            });
+                        } else {
+                            const accessToken = jwt.sign(
+                                {
+                                    id: response.id,
+                                    email: response.email,
+                                    role_code: response.role_code,
+                                },
+                                process.env.JWT_SECRET,
+                                { expiresIn: "3d" }
+                            );
+                            resolve({
+                                err: accessToken ? 0 : 1,
+                                mes: accessToken
+                                    ? "OK"
+                                    : "Fail to generate new access token. Let try more time",
+                                access_token: accessToken
+                                    ? `Bearer ${accessToken}`
+                                    : accessToken,
+                                refresh_token: refresh_token,
+                            });
+                        }
+                    }
+                );
+            }
+        } catch (error) {
+            reject(error);
         }
     });
